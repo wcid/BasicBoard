@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h2>Write Board Form</h2>
-    <form action="/board" method="post">
+    <form action="/board/create" method="post">
         <div>
             <label>Writer:</label>
             <input type="text" id="writer" placeholder="Enter Writer" name="writer"/>
@@ -20,10 +20,6 @@
         <div>
             <label>Contents:</label><br/>
             <textarea rows="20" cols="100" id="contents" placeholder="Enter contents" name="contents"></textarea>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" id="password" placeholder="Enter Password" name="password"/>
         </div>
         <button type="submit">Submit</button>
     </form>

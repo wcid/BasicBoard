@@ -4,7 +4,6 @@
 <html>
 <head>
     <title>BasicBoard</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 <div class="container">
@@ -14,7 +13,6 @@
             <th>Number</th>
             <th>Subject</th>
             <th>Writer</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -23,17 +21,11 @@
                 <td>${board.id}</td>
                 <td><a href="/board/${board.id}">${board.subject}</a></td>
                 <td>${board.writer}</td>
-                <td>
-                    <div>
-                        <button name="modify" value="${board.id}">Modify</button>
-                        <button name="delete" value="${board.id}">Delete</button>
-                    </div>
-                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-<button id="createBtn" type="button" class="btn btn-info btn-sm" data-toggle="modal">Write</button>
+<a href="/board/create"><button type="button">Write</button></a>
 </body>
 </html>

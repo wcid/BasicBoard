@@ -8,6 +8,6 @@ public interface BoardService {
     public List<Board> findAll();
     public Board findById(long id);
     public void insert(Board board);
-    public void update(Board board);
+    public void update(long id, Board board);
     public void delete(long id);
 }

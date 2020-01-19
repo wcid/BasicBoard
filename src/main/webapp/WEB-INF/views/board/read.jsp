@@ -4,15 +4,43 @@
 <html>
 <head>
     <title>BasicBoard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 <body>
 <div>
-    <h3>Subject : ${board.subject}</h3>
-    <h4>Writer : ${board.writer}</h4>
-    <h3>Contents : </h3>
-    <h4>${board.contents}</h4>
-    <h4>Creation DateTime : ${board.creationDateTime}</h4>
-    <h4>Modification DateTime : ${board.modificationDateTime}</h4>
+    <div>
+        <label>Writer:</label>
+        ${board.writer}
+    </div>
+    <div>
+        <label>Subject:</label>
+        ${board.subject}
+    </div>
+    <div>
+        <label>Contents:</label><br/>
+        <textarea rows="20" cols="100" readonly="true">${board.contents}</textarea>
+    </div>
+    <div>
+        <label>Creation DateTime:</label>
+        ${board.creationDateTime}
+    </div>
+    <div>
+        <label>Modification DateTime:</label>
+        ${board.modificationDateTime}
+    </div>
 </div>
+<a href="/board"><button type="button">Move to List</button></a>
+<a href="/board/update/${board.id}"><button type="button">Update</button></a>
+<button type="button" id="deleteBoard">Delete</button>
+<script type="text/javascript">
+    $("#deleteBoard").click(function() {
+        var result = confirm("Delete?");
+        if(result) {
+            location.href = '/board/delete/${board.id}';
+        }
+    });
+</script>
+
 </body>
 </html>
