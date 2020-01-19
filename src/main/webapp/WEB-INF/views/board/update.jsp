@@ -6,6 +6,6 @@
     <title>BasicBoard</title>
 </head>
 <body>
-Body
+
 </body>
 </html>
