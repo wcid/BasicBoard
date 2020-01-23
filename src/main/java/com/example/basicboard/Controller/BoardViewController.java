@@ -6,16 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BoardViewController {
-
-    private static final Logger logger = LoggerFactory.getLogger(BoardViewController.class);
 
     private final BoardService boardService;
 
@@ -29,29 +24,67 @@ public class BoardViewController {
         return "/home";
     }
 
-    @PostMapping("/board")
-    public String create() {
-        return "/board";
+    @GetMapping("/board/create")
+    public ModelAndView createBoard() {
+        ModelAndView nextView = new ModelAndView("/board/create");
+        return nextView;
     }
 
-    @GetMapping("/board/list")
+
+    @PostMapping("/board/create")
+    public ModelAndView CreateBoard(Board board) {
+        boardService.insert(board);
+        var list = boardService.findAll();
+
+        ModelAndView nextView = new ModelAndView("/board/list");
+        nextView.addObject("boardList", list);
+        return nextView;
+    }
+
+    @GetMapping("/board")
     public ModelAndView list() {
         var list = boardService.findAll();
-        ModelAndView mv = new ModelAndView("/list");
-        mv.addObject("boardList", list);
-        return mv;
+
+        ModelAndView nextView = new ModelAndView("/board/list");
+        nextView.addObject("boardList", list);
+        return nextView;
     }
 
     @GetMapping("/board/{id}")
     public ModelAndView readBoard(@PathVariable int id) {
         var board = boardService.findById(id);
-        ModelAndView mv = new ModelAndView("/board");
-        mv.addObject("board", board);
-        return mv;
+
+        ModelAndView nextView = new ModelAndView("/board/read");
+        nextView.addObject("board", board);
+        return nextView;
     }
 
-    @PutMapping("/board/{id}")
-    public void updateBoard(@PathVariable int id, Board board) {
+    @GetMapping("/board/update/{id}")
+    public ModelAndView updateBoard(@PathVariable int id) {
+        var board = boardService.findById(id);
 
+        ModelAndView nextView = new ModelAndView("/board/update");
+        nextView.addObject("board", board);
+        return nextView;
+    }
+
+    @PostMapping("/board/update/{id}")
+    public ModelAndView updateBoard(@PathVariable int id, Board board) {
+        boardService.update(id, board);
+        var Board = boardService.findById(id);
+
+        ModelAndView nextView = new ModelAndView("/board/read");
+        nextView.addObject("board", board);
+        return nextView;
+    }
+
+    @GetMapping("/board/delete/{id}")
+    public ModelAndView deleteBoard(@PathVariable int id) {
+        boardService.delete(id);
+        var list = boardService.findAll();
+
+        ModelAndView nextView = new ModelAndView("/board/list");
+        nextView.addObject("boardList", list);
+        return nextView;
     }
 }

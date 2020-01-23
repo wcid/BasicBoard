@@ -23,10 +23,6 @@ class BasicboardApplicationTests {
     @Test
     void contextLoads() {
 
-        boardService.insert(Board.builder().subject("dfs").contents("qweqe").writer("wcid").hashedPassword("32342").build());
-        var board = boardService.findById(2L);
-        board.setContents("updated");
-        boardService.update(board);
     }
 
 }

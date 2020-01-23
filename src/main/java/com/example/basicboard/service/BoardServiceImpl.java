@@ -34,8 +34,15 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void update(Board board) {
-        boardRepository.save(board);
+    public void update(long id, Board board) {
+        boardRepository.findById(id).map((find) -> {
+            find.setSubject(board.getSubject());
+            find.setContents(board.getContents());
+            return boardRepository.save(find);
+        }).orElseGet(() -> {
+            board.setId(id);
+            return boardRepository.save(board);
+        });
     }
 
     @Override

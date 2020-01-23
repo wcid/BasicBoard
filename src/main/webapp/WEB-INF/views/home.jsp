@@ -6,8 +6,6 @@
     <title>BasicBoard</title>
 </head>
 <body>
-<form action="/board" method="get">
-    <button type="submit">로그인 없음</button>
-</form>
+    <a href="/board"><button type="button">Move to List without Login</button></a>
 </body>
 </html>

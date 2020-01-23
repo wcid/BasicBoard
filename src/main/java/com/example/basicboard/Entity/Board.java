@@ -5,7 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -18,11 +17,10 @@ import java.time.LocalDateTime;
 public class Board implements Serializable {
 
     @Builder
-    public Board(String subject, String contents, String writer, String hashedPassword) {
+    public Board(String subject, String contents, String writer) {
         this.subject = subject;
         this.contents = contents;
         this.writer = writer;
-        this.hashedPassword = hashedPassword;
     }
 
     @Id
@@ -38,9 +36,6 @@ public class Board implements Serializable {
 
     @Column(name = "writer", nullable = false, length = 32)
     private String writer;
-
-    @Column(name = "hashedPassword", nullable = false, length = 256)
-    private String hashedPassword;
 
     @Column(name = "creationDateTime")
     @CreationTimestamp
